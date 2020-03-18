@@ -41,4 +41,6 @@
 //@Library(value="pipeline-lib@your_branch") _
 
 // only needed on Leap 15
-packageBuildingPipeline(['distros': ['leap15']])
+// disable rpmlint due to Leap-only tags in specfile
+packageBuildingPipeline(['distros': ['leap15'],
+                         'rpmlint_check': false])
