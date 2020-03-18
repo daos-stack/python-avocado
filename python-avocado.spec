@@ -15,6 +15,18 @@
 # Please submit bugfixes or comments via https://bugs.opensuse.org/
 #
 
+%{!?ifpython2: %define ifpython2    \
+%if "%{python_flavor}" == "python2" \
+%{nil}                              \
+}
+
+%{!?python_subpackages: %define python_subpackages \
+%{nil}                                             \
+}
+
+%{!?python_files: %define python_files \
+%{nil}                                 \
+}
 
 # No longer build for python2
 #define skip_python2  1
