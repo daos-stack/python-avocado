@@ -35,7 +35,7 @@
 %define         pkgname avocado
 Name:           python-avocado
 Version:        69.0
-Release:        lp151.4.1
+Release:        lp151.4.2
 Summary:        Avocado Test Framework
 License:        GPL-2.0-only
 Group:          Development/Tools/Other
@@ -78,7 +78,7 @@ BuildRequires:  %{python_module libvirt-python}
 BuildRequires:  python-libvirt-python
 %endif
 %ifpython2
-Requires:       python2-pylzma
+Requires:       python-pylzma
 Requires:       python2-subprocess32 >= 3.2.6
 %endif
 %python_subpackages
@@ -655,6 +655,9 @@ mkdir -p %{buildroot}%{_libexecdir}/avocado
 %{_docdir}/avocado/varianter_pict
 
 %changelog
+* Thu Mar 19 2020 Brian J. Murrell <brian.murrell@intel.com>
+- Restart building for python2
+- python2-pylzma -> python-pylzma
 * Thu Feb 20 2020 James Fehlig <jfehlig@suse.com>
 - Stop building for python2
 * Sat Sep 14 2019 John Vandenberg <jayvdb@gmail.com>
