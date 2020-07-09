@@ -28,19 +28,19 @@
 %{nil}                                 \
 }
 
+
 # No longer build for python2
 #define skip_python2  1
-
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
 %define         pkgname avocado
 Name:           python-avocado
 Version:        69.0
-Release:        lp151.4.2
+Release:        lp152.6.2.01
 Summary:        Avocado Test Framework
 License:        GPL-2.0-only
 Group:          Development/Tools/Other
 URL:            https://avocado-framework.github.io/
-Source:         https://github.com/avocado-framework/avocado/archive/%{version}.tar.gz
+Source:         https://github.com/avocado-framework/avocado/archive/%{version}.tar.gz#/%{pkgname}-%{version}.tar.gz
 BuildRequires:  %{python_module Sphinx}
 BuildRequires:  %{python_module aexpect}
 BuildRequires:  %{python_module devel}
@@ -62,7 +62,7 @@ BuildRequires:  python-rpm-macros
 Requires:       %{pkgname}-common
 Requires:       gdb
 Requires:       procps
-Requires:       python-Fabric3
+Requires:       python-Fabric
 Requires:       python-requests >= 1.2.3
 Requires:       python-setuptools
 Requires:       python-six >= 1.11.0
@@ -78,7 +78,7 @@ BuildRequires:  %{python_module libvirt-python}
 BuildRequires:  python-libvirt-python
 %endif
 %ifpython2
-Requires:       python-pylzma
+Requires:       python2-pylzma
 Requires:       python2-subprocess32 >= 3.2.6
 %endif
 %python_subpackages
@@ -90,6 +90,7 @@ framework) to perform automated testing.
 %package  -n    %{pkgname}-common
 Summary:        Avocado Test Framework
 Group:          Development/Languages/Python
+Conflicts:      avocado < %{version}
 
 %description   -n  %{pkgname}-common
 Avocado is a set of tools and libraries (what people call these days a
@@ -126,7 +127,7 @@ an arbitrary filesystem location.
 Summary:        Avocado Runner for Remote Execution
 Group:          Development/Languages/Python
 Requires:       python2-%{pkgname} = %{version}
-Requires:       python2-Fabric3
+Requires:       python2-Fabric
 
 %description -n python2-%{pkgname}-plugins-runner-remote
 This plugin allows Avocado to run jobs on a remote machine, by means of an SSH
@@ -137,7 +138,7 @@ connection. Avocado must have been previously installed on the remote machine.
 Summary:        Avocado Runner for Remote Execution
 Group:          Development/Languages/Python
 Requires:       python3-%{pkgname} = %{version}
-Requires:       python3-Fabric3
+Requires:       python3-Fabric
 
 %description -n python3-%{pkgname}-plugins-runner-remote
 This plugin allows Avocado to run jobs on a remote machine, by means of an SSH
@@ -655,9 +656,17 @@ mkdir -p %{buildroot}%{_libexecdir}/avocado
 %{_docdir}/avocado/varianter_pict
 
 %changelog
-* Thu Mar 19 2020 Brian J. Murrell <brian.murrell@intel.com>
+* Thu Jul  9 2020 Brian J. Murrell <brian.murrell@intel.com>
+- https://download.opensuse.org/repositories/devel:/languages:/python:/backports/openSUSE_Leap_15.2/src/
 - Restart building for python2
 - python2-pylzma -> python-pylzma
+- Conditially define SLES python2 macros
+* Mon May 25 2020 Jason Craig <os-dev@jacraig.com>
+- Require python-Fabric instead of python-Fabric3.
+  Fabric now supports Python 3 and Fabric3 has declared itself
+  deprecated.
+* Fri Mar 20 2020 Martin Pluskal <mpluskal@suse.com>
+- Add conflict with old avocado for migration
 * Thu Feb 20 2020 James Fehlig <jfehlig@suse.com>
 - Stop building for python2
 * Sat Sep 14 2019 John Vandenberg <jayvdb@gmail.com>
