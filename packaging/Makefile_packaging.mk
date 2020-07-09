@@ -40,7 +40,7 @@ RPMS              = $(eval RPMS := $(addsuffix .rpm,$(addprefix _topdir/RPMS/x86
 DEB_TOP          := _topdir/BUILD
 DEB_BUILD        := $(DEB_TOP)/$(NAME)-$(DEB_VERS)
 DEB_TARBASE      := $(DEB_TOP)/$(DEB_NAME)_$(DEB_VERS)
-SOURCE           ?= $(eval SOURCE := $(shell CHROOT_NAME=$(CHROOT_NAME) $(SPECTOOL) -S -l $(SPEC) | sed -e 2,\$$d -e 's/.*:  *//'))$(SOURCE)
+SOURCE           ?= $(eval SOURCE := $(shell set -x; CHROOT_NAME=$(CHROOT_NAME) $(SPECTOOL) -S -l $(SPEC) | sed -e 2,\$$d -e 's/\\\#/\\\\\#/g' -e 's/.*:  *//'))$(SOURCE)
 PATCHES          ?= $(eval PATCHES := $(shell CHROOT_NAME=$(CHROOT_NAME) $(SPECTOOL) -l $(SPEC) | sed -e 1d -e 's/.*:  *//' -e 's/.*\///'))$(PATCHES)
 SOURCES          := $(addprefix _topdir/SOURCES/,$(notdir $(SOURCE)) $(PATCHES))
 ifeq ($(ID_LIKE),debian)
@@ -116,17 +116,20 @@ _topdir/SOURCES/%: % | _topdir/SOURCES/
 ifeq ($(DL_VERSION),)
 DL_VERSION = $(VERSION)
 endif
+ifeq ($(DL_NAME),)
+DL_NAME = $(NAME)
+endif
 
-$(NAME)-$(DL_VERSION).tar.$(SRC_EXT).asc:
-	rm -f ./$(NAME)-*.tar.{gz,bz*,xz}.asc
+$(DL_NAME)-$(DL_VERSION).tar.$(SRC_EXT).asc:
+	rm -f ./$(DL_NAME)-*.tar.{gz,bz*,xz}.asc
 	curl -f -L -O '$(SOURCE).asc'
 
-$(NAME)-$(DL_VERSION).tar.$(SRC_EXT).sig:
-	rm -f ./$(NAME)-*.tar.{gz,bz*,xz}.sig
+$(DL_NAME)-$(DL_VERSION).tar.$(SRC_EXT).sig:
+	rm -f ./$(DL_NAME)-*.tar.{gz,bz*,xz}.sig
 	curl -f -L -O '$(SOURCE).sig'
 
-$(NAME)-$(DL_VERSION).tar.$(SRC_EXT):
-	rm -f ./$(NAME)-*.tar.{gz,bz*,xz}
+$(DL_NAME)-$(DL_VERSION).tar.$(SRC_EXT):
+	rm -f ./$(DL_NAME)-*.tar.{gz,bz*,xz}
 	curl -f -L -O '$(SOURCE)'
 
 v$(DL_VERSION).tar.$(SRC_EXT):
