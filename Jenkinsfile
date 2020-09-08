@@ -40,5 +40,5 @@
 // I.e. for testing library changes
 //@Library(value="pipeline-lib@your_branch") _
 
-// only needed on Leap 15
-packageBuildingPipeline(['distros': ['leap15']])
+// only needed on Leap 15 and Ubuntu 20.04
+packageBuildingPipeline(['distros': ['leap15', 'ubuntu20.04']])
