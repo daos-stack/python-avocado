@@ -1,0 +1,29 @@
+Source: python-avocado
+Section: python
+Priority: optional
+Maintainer: Brian J. Murrell <brian.murrell@intel.com>
+Build-Depends: debhelper (>=11~), dh-python, python3-all, python3-setuptools, python3-six (>= 1.10), python3-stevedore (>= 0.14), python3-requests
+
+Package: avocado
+Architecture: all
+Homepage: http://avocado-framework.github.io/
+Depends: ${misc:Depends}, ${python3:Depends}, python3-avocado
+Description: Avocado is a framework for fully automated testing.
+
+Package: python3-avocado
+Architecture: all
+Homepage: http://avocado-framework.github.io/
+Depends: ${misc:Depends}, ${python3:Depends}, python3-yaml, python3-pystache, fabric
+Description: Avocado is a framework for fully automated testing.
+
+Package: python3-avocado-plugins-varianter-yaml-to-mux
+Architecture: all
+Homepage: http://avocado-framework.github.io/
+Depends: ${misc:Depends}, ${python3:Depends}, python3-avocado
+Description: Avocado is a framework for fully automated testing.
+
+Package: python3-avocado-plugins-output-html
+Architecture: all
+Homepage: http://avocado-framework.github.io/
+Depends: ${misc:Depends}, ${python3:Depends}, python3-avocado, libjs-jquery
+Description: Avocado is a framework for fully automated testing.
