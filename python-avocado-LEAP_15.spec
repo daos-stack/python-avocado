@@ -15,6 +15,10 @@
 # Please submit bugfixes or comments via https://bugs.opensuse.org/
 #
 
+# compatibility macros so that this spec will evaluate on RH
+%if 0%{?fedora} >= 33
+%global __python %{__python3}}
+%endif
 %{!?ifpython2: %define ifpython2    \
 %if "%{python_flavor}" == "python2" \
 %{nil}                              \
@@ -73,7 +77,11 @@ Provides:       %{pkgname} = %{version}
 Obsoletes:      %{pkgname} < %{version}
 BuildArch:      noarch
 %if 0%{?suse_version} >= 1500
+%if 0%{?sle_version} < 150200
 BuildRequires:  %{python_module libvirt-python}
+%else
+BuildRequires:  python3-libvirt-python
+%endif
 %else
 BuildRequires:  python-libvirt-python
 %endif
