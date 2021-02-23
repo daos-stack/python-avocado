@@ -111,7 +111,7 @@ BuildRequires: python2-fabric3
 %else
 BuildRequires: fabric
 %endif
-%endif # with_fabric
+%endif
 %if 0%{?fedora} || 0%{?rhel} > 7
 BuildRequires: python2-enum34
 BuildRequires: python2-lxml
@@ -157,7 +157,7 @@ BuildRequires: python%{pypref}-sphinx
 %if %{with_python3_fabric}
 BuildRequires: python3-fabric3
 %endif
-%endif # with_fabric
+%endif
 %endif
 
 %if 0%{?with_tests}
@@ -233,7 +233,7 @@ pushd optional_plugins/runner_remote
     %if %{with_python3_fabric}
     %py3_build
     %endif
-%endif # with_fabric
+%endif
 popd
 pushd optional_plugins/runner_vm
 %if %{with_fabric}
@@ -243,7 +243,7 @@ pushd optional_plugins/runner_vm
     %if %{with_python3_fabric}
     %py3_build
     %endif
-%endif # with_fabric
+%endif
 popd
 pushd optional_plugins/runner_docker
 %if %{with_fabric}
@@ -253,7 +253,7 @@ pushd optional_plugins/runner_docker
     %if %{with_python3_fabric}
     %py3_build
     %endif
-%endif # with_fabric
+%endif
 popd
 pushd optional_plugins/resultsdb
     %if %{with_python2_resultsdb}
@@ -371,7 +371,7 @@ pushd optional_plugins/runner_remote
     %if %{with_python3_fabric}
     %py3_install
     %endif
-%endif # with_fabric
+%endif
 popd
 pushd optional_plugins/runner_vm
 %if %{with_fabric}
@@ -381,7 +381,7 @@ pushd optional_plugins/runner_vm
     %if %{with_python3_fabric}
     %py3_install
     %endif
-%endif # with_fabric
+%endif
 popd
 pushd optional_plugins/runner_docker
 %if %{with_fabric}
@@ -391,7 +391,7 @@ pushd optional_plugins/runner_docker
     %if %{with_python3_fabric}
     %py3_install
     %endif
-%endif # with_fabric
+%endif
 popd
 pushd optional_plugins/resultsdb
     %if %{with_python2_resultsdb}
@@ -509,12 +509,12 @@ find %{buildroot}%{_docdir}/avocado -type f -name '*.py' -exec %{__chmod} -c -x 
     pushd optional_plugins/runner_docker
         %{__python2} setup.py develop --user
     popd
-    %endif # with_fabric
+    %endif
     %if %{with_python2_resultsdb}
     pushd optional_plugins/resultsdb
         %{__python2} setup.py develop --user
     popd
-    %endif # with_python2_resultsdb
+    %endif
     pushd optional_plugins/varianter_yaml_to_mux
         %{__python2} setup.py develop --user
     popd
@@ -565,8 +565,8 @@ find %{buildroot}%{_docdir}/avocado -type f -name '*.py' -exec %{__chmod} -c -x 
     pushd optional_plugins/runner_docker
         %{__python3} setup.py develop --user
     popd
-    %endif # with_python3_fabric
-    %endif # with_fabric
+    %endif
+    %endif
     pushd optional_plugins/resultsdb
         %{__python3} setup.py develop --user
     popd
@@ -784,7 +784,7 @@ connection. Avocado must be previously installed on the remote machine.
 %{python3_sitelib}/avocado_runner_remote/
 %{python3_sitelib}/avocado_framework_plugin_runner_remote-%{version}-py%{python3_version}.egg-info
 %endif
-%endif # with_fabric
+%endif
 
 
 %if %{with_fabric}
@@ -827,7 +827,7 @@ itself. Avocado must be previously installed on the VM.
 %{python3_sitelib}/avocado_runner_vm/
 %{python3_sitelib}/avocado_framework_plugin_runner_vm-%{version}-py%{python3_version}.egg-info
 %endif
-%endif # with_fabric
+%endif
 
 
 %if %{with_fabric}
@@ -866,7 +866,7 @@ be previously installed on the container.
 %{python3_sitelib}/avocado_runner_docker/
 %{python3_sitelib}/avocado_framework_plugin_runner_docker-%{version}-py%{python3_version}.egg-info
 %endif
-%endif # with_fabric
+%endif
 
 
 %if %{with_python2_resultsdb}
