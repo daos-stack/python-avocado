@@ -656,11 +656,13 @@ Requires: gdb
 Requires: gdb-gdbserver
 Requires: procps-ng
 Requires: python3
-Requires: python3-pycdlib
 Requires: python3-requests
 Requires: python3-setuptools
-Requires: python3-six
+Requires: python%{pypref}-six
+%if 0%{?fedora} || 0%{?rhel} > 7
 Requires: python3-stevedore
+Requires: python3-pycdlib
+%endif
 
 %description -n python3-%{pkgname}
 Avocado is a set of tools and libraries (what people call
