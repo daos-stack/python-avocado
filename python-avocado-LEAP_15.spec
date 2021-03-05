@@ -18,7 +18,6 @@
 # compatibility macros so that this spec will evaluate on RH
 %if 0%{?fedora} >= 33
 %global __python %{__python3}}
-%endif
 %{!?ifpython2: %define ifpython2    \
 %if "%{python_flavor}" == "python2" \
 %{nil}                              \
@@ -31,6 +30,7 @@
 %{!?python_files: %define python_files \
 %{nil}                                 \
 }
+%endif
 
 
 # No longer build for python2
@@ -667,6 +667,7 @@ mkdir -p %{buildroot}%{_libexecdir}/avocado
 %changelog
 * Tue Feb 23 2021 Brian J. Murrell <brian.murrell@inte.com>
 - Update to version 69.2
+- Build on Python 2 also
 * Mon May 25 2020 Jason Craig <os-dev@jacraig.com>
 - Require python-Fabric instead of python-Fabric3.
   Fabric now supports Python 3 and Fabric3 has declared itself
