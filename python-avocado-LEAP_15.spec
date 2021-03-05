@@ -15,23 +15,8 @@
 # Please submit bugfixes or comments via https://bugs.opensuse.org/
 #
 
-# compatibility macros so that this spec will evaluate on RH
-%if 0%{?fedora} >= 33
-%global __python %{__python3}}
-%{!?ifpython2: %define ifpython2    \
-%if "%{python_flavor}" == "python2" \
-%{nil}                              \
-}
-
-%{!?python_subpackages: %define python_subpackages \
-%{nil}                                             \
-}
-
-%{!?python_files: %define python_files \
-%{nil}                                 \
-}
-%endif
-
+# Needed in order to be able to process this spec on RH distros
+%{!?ifpython2: %define ifpython2 "%if 0 == 1"}
 
 # No longer build for python2
 # We still need python2 for a bit longer
