@@ -90,7 +90,7 @@ BuildRequires:  python-libvirt-python
 Requires:       python2-pylzma
 Requires:       python2-subprocess32 >= 3.2.6
 %endif
-%python_subpackages
+%{?python_subpackages}
 
 %description
 Avocado is a set of tools and libraries (what people call these days a
