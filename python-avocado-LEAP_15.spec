@@ -15,23 +15,27 @@
 # Please submit bugfixes or comments via https://bugs.opensuse.org/
 #
 
-# Needed in order to be able to process this spec on RH distros
+# compatibility macros so that this spec will evaluate on RH
 %if 0%{?fedora} >= 33
 %global __python %{__python3}
 %endif
-
-%{!?ifpython2: %{warn: defining ifpython2 for compatibility} %define ifpython2    \
+%{!?ifpython2: %define ifpython2    \
 %if "%{python_flavor}" == "python2" \
 %{nil}                              \
 }
 
-%{!?python_files: %{warn: defining python_files for compatibility} %define python_files \
+%{!?python_subpackages: %define python_subpackages \
+%{nil}                                             \
+}
+
+%{!?python_files: %define python_files \
 %{nil}                                 \
 }
 
 # No longer build for python2
+%define skip_python2  1
 # We still need python2 for a bit longer
-%define skip_python2  0
+%undefine skip_python2
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
 %define         pkgname avocado
 Name:           python-avocado
