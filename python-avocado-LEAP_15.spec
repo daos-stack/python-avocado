@@ -34,7 +34,8 @@
 
 
 # No longer build for python2
-%define skip_python2  1
+# We still need python2 for a bit longer
+%define skip_python2  0
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
 %define         pkgname avocado
 Name:           python-avocado
