@@ -737,7 +737,7 @@ arbitrary filesystem location.
 Summary: Avocado HTML report plugin
 %{?python_provide:%python_provide python3-%{pkgname}-plugins-output-html}
 Requires: python3-%{pkgname} == %{version}-%{release}
-Requires: python3-jinja2
+Requires: python%{pypref}-jinja2
 
 %description -n python3-%{pkgname}-plugins-output-html
 Adds to avocado the ability to generate an HTML report at every job results
@@ -931,7 +931,11 @@ defined in a yaml file(s).
 Summary: Avocado plugin to generate variants out of yaml files
 %{?python_provide:%python_provide python3-%{pkgname}-plugins-varianter-yaml-to-mux}
 Requires: python3-%{pkgname} == %{version}-%{release}
+%if 0%{?rhel} >= 7
+Requires: python%{pypref}-PyYAML
+%else
 Requires: python3-yaml
+%endif
 
 %description -n python3-%{pkgname}-plugins-varianter-yaml-to-mux
 Can be used to produce multiple test variants with test parameters
