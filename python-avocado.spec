@@ -26,12 +26,12 @@
 # enabled by default.
 %global with_tests 0
 
-%if 0%{?fedora} > 30 || 0%{?rhel} > 7 || (0%{?suse_version} >= 1500)
+%if 0%{?fedora} > 30 || 0%{?rhel} > 7 || 0%{?suse_version} >= 1500
 %global with_python2 0
 %else
 %global with_python2 1
 %endif
-%if 0%{?fedora} || 0%{?rhel} > 6 || (0%{?suse_version} >= 1500)
+%if 0%{?fedora} || 0%{?rhel} > 6 || 0%{?suse_version} >= 1500
 %global with_python3 1
 %else
 %global with_python3 0
@@ -79,7 +79,11 @@ Source0: https://github.com/avocado-framework/%{srcname}/archive/%{version}.tar.
 Source0: https://github.com/avocado-framework/%{srcname}/archive/%{commit}.tar.gz#/%{gittar}
 %endif
 BuildArch: noarch
+%if 0%{?suse_version} >= 1500
+BuildRequires: Procps-ng
+%else
 BuildRequires: procps-ng
+%endif
 BuildRequires: kmod
 %if %{with_fabric}
 %if 0%{?fedora} >= 29
@@ -88,7 +92,11 @@ BuildRequires: python2-fabric3
 BuildRequires: fabric
 %endif
 %if %{with_python3_fabric}
+%if 0%{?suse_version} >= 1500
+BuildRequires: python3-Fabric3
+%else
 BuildRequires: python3-fabric3
+%endif
 %endif
 %endif
 %if 0%{?fedora} >= 30
@@ -137,7 +145,15 @@ BuildRequires: python2-resultsdb_api
 %endif
 
 %if %{with_python3}
+%if 0%{?suse_version} >= 1500
+BuildRequires: python3-Jinja2
+BuildRequires: python3-Sphinx
+BuildRequires: python3-Pycdlib
+%else
 BuildRequires: python3-jinja2
+BuildRequires: python3-sphinx
+BuildRequires: python3-pycdlib
+%endif
 BuildRequires: python3-aexpect
 BuildRequires: python3-devel
 BuildRequires: python3-docutils
@@ -147,9 +163,7 @@ BuildRequires: python3-requests
 BuildRequires: python3-resultsdb_api
 BuildRequires: python3-setuptools
 BuildRequires: python3-six
-BuildRequires: python3-sphinx
 BuildRequires: python3-stevedore
-BuildRequires: python3-pycdlib
 %endif
 
 %if %{with_tests}
@@ -184,7 +198,11 @@ Summary: %{summary}
 Requires: %{name}-common == %{version}
 Requires: gdb
 Requires: gdb-gdbserver
+%if 0%{?suse_version} >= 1500
+Requires: Procps-ng
+%else
 Requires: procps-ng
+%endif
 Requires: pyliblzma
 %if 0%{?rhel} == 7
 Requires: python
@@ -219,7 +237,11 @@ Summary: %{summary}
 Requires: %{name}-common == %{version}
 Requires: gdb
 Requires: gdb-gdbserver
+%if 0%{?suse_version} >= 1500
+Requires: Procps-ng
+%else
 Requires: procps-ng
+%endif
 Requires: pyliblzma
 Requires: python3
 Requires: python3-requests
@@ -754,7 +776,12 @@ arbitrary filesystem location.
 %if %{with_python3}
 %package -n python3-%{srcname}-plugins-output-html
 Summary: Avocado HTML report plugin
-Requires: python3-%{srcname} == %{version}, python3-jinja2
+Requires: python3-%{srcname} == %{version}
+%if 0%{?suse_version} >= 1500
+BuildRequires: python3-Jinja2
+%else
+BuildRequires: python3-jinja2
+%endif
 
 %description -n python3-%{srcname}-plugins-output-html
 Adds to avocado the ability to generate an HTML report at every job results
@@ -790,7 +817,11 @@ connection.  Avocado must be previously installed on the remote machine.
 %package -n python3-%{srcname}-plugins-runner-remote
 Summary: Avocado Runner for Remote Execution
 Requires: python3-%{srcname} == %{version}
+%if 0%{?suse_version} >= 1500
+Requires: python3-Fabric3
+%else
 Requires: python3-fabric3
+%endif
 
 %description -n python3-%{srcname}-plugins-runner-remote
 Allows Avocado to run jobs on a remote machine, by means of an SSH
