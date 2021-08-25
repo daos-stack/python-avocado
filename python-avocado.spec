@@ -24,7 +24,7 @@
 # the functional tests are time and resource sensitive and can
 # cause race conditions and random build failures. They are
 # enabled by default.
-%global with_tests 1
+%global with_tests 0
 
 %if 0%{?fedora} > 30 || 0%{?rhel} > 7
 %global with_python2 0
@@ -65,11 +65,6 @@
 # or python3 "Requires".  This filters out the python binaries
 # from the RPM automatic requires/provides scanner.
 %global __requires_exclude ^/usr/bin/python[23]$
-
-# Only build python3 packages
-%global with_python2 0
-%global with_python3 1
-%global with_python2_resultsdb 0
 
 Summary: Framework with tools and libraries for Automated Testing
 Name: python-%{srcname}
