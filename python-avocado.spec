@@ -26,12 +26,12 @@
 # enabled by default.
 %global with_tests 0
 
-%if 0%{?fedora} > 30 || 0%{?rhel} > 7
+%if 0%{?fedora} > 30 || 0%{?rhel} > 7 || (0%{?suse_version} >= 1500)
 %global with_python2 0
 %else
 %global with_python2 1
 %endif
-%if 0%{?fedora} || 0%{?rhel} > 7
+%if 0%{?fedora} || 0%{?rhel} > 6 || (0%{?suse_version} >= 1500)
 %global with_python3 1
 %else
 %global with_python3 0
