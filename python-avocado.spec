@@ -66,6 +66,11 @@
 # from the RPM automatic requires/provides scanner.
 %global __requires_exclude ^/usr/bin/python[23]$
 
+# Only build python3 packages
+%global with_python2 0
+%global with_python3 1
+%global with_python2_resultsdb 0
+
 Summary: Framework with tools and libraries for Automated Testing
 Name: python-%{srcname}
 Version: 69.3

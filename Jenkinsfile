@@ -41,5 +41,4 @@
 //@Library(value="pipeline-lib@your_branch") _
 
 // only needed on Leap 15 and CentOS 7
-packageBuildingPipeline(['distros': ['centos7', 'leap15'],
-                        rpmlint_check: false])
+packageBuildingPipeline(['distros': ['centos7', 'leap15']])
