@@ -79,11 +79,7 @@ Source0: https://github.com/avocado-framework/%{srcname}/archive/%{version}.tar.
 Source0: https://github.com/avocado-framework/%{srcname}/archive/%{commit}.tar.gz#/%{gittar}
 %endif
 BuildArch: noarch
-%if 0%{?suse_version} >= 1500
-BuildRequires: Procps-ng
-%else
 BuildRequires: procps-ng
-%endif
 BuildRequires: kmod
 %if %{with_fabric}
 %if 0%{?fedora} >= 29
@@ -206,11 +202,7 @@ Summary: %{summary}
 Requires: %{name}-common == %{version}
 Requires: gdb
 Requires: gdb-gdbserver
-%if 0%{?suse_version} >= 1500
-Requires: Procps-ng
-%else
 Requires: procps-ng
-%endif
 Requires: pyliblzma
 %if 0%{?rhel} == 7
 Requires: python
@@ -245,11 +237,7 @@ Summary: %{summary}
 Requires: %{name}-common == %{version}
 Requires: gdb
 Requires: gdb-gdbserver
-%if 0%{?suse_version} >= 1500
-Requires: Procps-ng
-%else
 Requires: procps-ng
-%endif
 Requires: pyliblzma
 Requires: python3
 Requires: python3-requests
