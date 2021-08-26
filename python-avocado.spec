@@ -39,7 +39,7 @@
 
 # Avocado is currently incompatible with the Fabric API in Fedora 31 and later
 # https://github.com/avocado-framework/avocado/issues/3125
-%if 0%{?fedora} >= 31
+%if 0%{?fedora} >= 31 || %{with python3}
 %global with_fabric 0
 %else
 %global with_fabric 1
@@ -154,16 +154,24 @@ BuildRequires: python3-jinja2
 BuildRequires: python3-sphinx
 BuildRequires: python3-pycdlib
 %endif
+%if 0%{?rhel} == 7
+# BuildRequires: python36-aexpect
+BuildRequires: python36-docutils
+# BuildRequires: python3-resultsdb_api
+BuildRequires: python3-stevedore
+%else
 BuildRequires: python3-aexpect
+BuildRequires: python3-docutils
+BuildRequires: python3-resultsdb_api
+BuildRequires: python3-stevedore
+%endif
 BuildRequires: python3-devel
 BuildRequires: python3-docutils
 BuildRequires: python3-lxml
 BuildRequires: python3-psutil
 BuildRequires: python3-requests
-BuildRequires: python3-resultsdb_api
 BuildRequires: python3-setuptools
 BuildRequires: python3-six
-BuildRequires: python3-stevedore
 %endif
 
 %if %{with_tests}
