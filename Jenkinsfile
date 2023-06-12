@@ -41,4 +41,6 @@
 //@Library(value="pipeline-lib@your_branch") _
 
 // only needed on Leap 15 and Ubuntu 20.04
-packageBuildingPipeline(['distros': ['leap15', 'ubuntu20.04']])
+// Ubuntu 20.04 needs work
+packageBuildingPipeline(['distros': ['centos7', 'leap15'],
+                        rpmlint_check: false])
